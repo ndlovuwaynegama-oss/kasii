@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kasi Lyfstyle Tshisanyama | Authentic Braai Experience</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ====== VARIABLES ====== */
+    :root {
+      --primary-orange: #E96400;
+      --primary-brown: #4E3C32;
+      --accent-gold: #FFD700;
+      --cream-bg: #F5F5DC;
+      --charcoal: #2C2723;
+      --dark-bg: #1a1a1a;
+      --darker-bg: #222;
+      --light-text: #f0f0f0;
+      --gold-color: #FFD700;
+    }
+
+    /* ====== BASE STYLES ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--cream-bg);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+    #flame-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ====== NAVBAR ====== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem 0;
+      background: rgba(78, 60, 50, 0.7);
+      backdrop-filter: blur(15px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--accent-gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 50px;
+      margin-right: 10px;
+    }
+    .nav-links {
+      display: flex;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--accent-gold);
+    }
+    .mobile-menu-btn {
+      display: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* ====== HERO SECTION ====== */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    .gold-text {
+      color: var(--accent-gold);
+    }
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 2rem;
+    }
+    .cta-button {
+      background: var(--accent-gold);
+      color: var(--primary-brown);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .cta-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* ====== SPECIAL SECTION ====== */
+    .special-section {
+      padding: 5rem 0;
+      background: white;
+    }
+    .special-card {
+      display: flex;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .special-image {
+      width: 50%;
+      object-fit: cover;
+    }
+    .special-details {
+      width: 50%;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .special-details h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-orange);
+    }
+    .special-details p {
+      margin-bottom: 1.5rem;
+    }
+    .price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-orange);
+      margin-bottom: 1.5rem;
+    }
+    .order-btn {
+      background: var(--primary-orange);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .order-btn:hover {
+      background: var(--accent-gold);
+      color: var(--primary-brown);
+      transform: translateY(-3px);
+    }
+
+    /* ====== FIXED SECTIONS ====== */
+    section {
+      padding-top: 80px;
+      padding-bottom: 2rem;
+      min-height: calc(100vh - 80px);
+      box-sizing: border-box;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    section.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: var(--primary-brown);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .footer-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+    .social-links {
+      margin: 1.5rem 0;
+    }
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 0.5rem;
+      transition: color 0.3s;
+    }
+    .social-links a:hover {
+      color: var(--accent-gold);
+    }
+    .sponsor {
+      margin-top: 2rem;
+    }
+    .sponsor-logo {
+      height: 50px;
+      margin-top: 1rem;
+    }
+
+    /* ====== RESPONSIVE DESIGN ====== */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .special-card {
+        flex-direction: column;
+      }
+      
+      .special-image, .special-details {
+        width: 100%;
+      }
+      
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(78, 60, 50, 0.9);
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      .nav-links.active {
+        display: flex;
+      }
+      
+      .nav-links a {
+        margin: 0.5rem 0;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      section {
+        padding-top: 70px;
+        min-height: calc(100vh - 70px);
+      }
+    }
+
+    /* Additional styles for demonstration purposes */
+    .specials-board {
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #ffcc00;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      max-width: 700px;
+      width: 90%;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      animation: glowBoard 2s ease-in-out infinite alternate;
+    }
+    .specials-board h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #ffcc00;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      text-shadow: 0 0 10px #ff0000;
+    }
+    .specials-board ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .specials-board li {
+      font-size: 1.05rem;
+      margin: 0.5rem 0;
+      color: #eee;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+    @keyframes glowBoard {
+      from {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      }
+      to {
+        box-shadow: 0 0 25px rgba(255, 100, 0, 0.9);
+      }
+    }
+
+    /* Animation for demonstration */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Bitcoin Notice */
+    .bitcoin-notice {
+      background: linear-gradient(135deg, #f7931a 0%, #f2a900 100%);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 8px;
+      margin: 1.5rem auto;
+      max-width: 800px;
+      box-shadow: 0 4px 15px rgba(247, 147, 26, 0.4);
+    }
+
+    /* Events Section Styling */
+    .event-card {
+      display: flex;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .event-poster {
+      flex: 0 0 200px;
+    }
+    
+    .event-poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .event-details {
+      padding: 1.5rem;
+      flex: 1;
+    }
+    
+    /* Video Section */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .video-placeholder {
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    /* Testimonial Image Carousel */
+    .testimonial-carousel {
+      overflow: hidden;
+      position: relative;
+      height: 150px;
+      margin: 2rem 0;
+    }
+    
+    .testimonial-images {
+      display: flex;
+      animation: scrollImages 30s linear infinite;
+    }
+    
+    .testimonial-images img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 10px;
+      border: 3px solid var(--accent-gold);
+    }
+    
+    @keyframes scrollImages {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    
+    /* Cart System */
+    .cart-icon {
+      position: relative;
+      margin-left: 2rem;
+      cursor: pointer;
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: var(--accent-gold);
+      color: var(--primary-brown);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    
+    .cart-modal {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 400px;
+      height: 100vh;
+      background: white;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      z-index: 1000;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+    
+    .cart-modal.active {
+      right: 0;
+    }
+    
+    .cart-items {
+      margin: 1rem 0;
+    }
+    
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .payment-options {
+      margin-top: 2rem;
+    }
+    
+    .payment-option {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .payment-option:hover {
+      background: #f5f5f5;
+    }
+    
+    .payment-option.selected {
+      border-color: var(--accent-gold);
+      background: rgba(255, 215, 0, 0.1);
+    }
+    
+    /* Login Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      display: none;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
+    .modal {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 400px;
+    }
+    
+    .modal h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .modal input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+
+
+    
+  </style>
+</head>
+<body>
+  <canvas id="flame-canvas"></canvas>
+  <nav class="navbar">
+    <div class="container">
+      <a href="#home" class="logo">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48Y2lyY2xlIGN4PSIyNSIgY3k9IjI1IiByPSIyMyIgZmlsbD0iI0ZGRDcwMCIgc3Ryb2tlPSIjRTk2NDAwIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMzUgMTVIMTVWMzVIMzVWMTVaTTE4IDI4VjMySDE1VjE4SDE4VjIySDI4VjE4SDMxVjMySDI4VjI4SDE4WiIgZmlsbD0iIzRFM0MzMiIvPjwvc3ZnPg==" alt="Kasi Lyfstyle Logo"> Kasi Lyfstyle 
+      </a>
+      <div class="nav-links">
+        <a href="#home" class="nav-btn active">Home</a>
+        <a href="#menu" class="nav-btn">Menu</a>
+        <a href="#story" class="nav-btn">Our Story</a>
+        <a href="#performances" class="nav-btn">Events</a>
+        <a href="#testimonials" class="nav-btn">Testimonials</a>
+        <a href="#contact" class="nav-btn">Contact</a>
+        <div class="cart-icon" id="cartIcon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </div>
+        <a href="#" class="nav-btn" id="loginBtn">Login</a>
+      </div>
+      <div class="mobile-menu-btn">☰</div>
+    </div>
+  </nav>
+
+  <section id="home" class="active">
+    <header class="hero">
+      <h1 class="hero-title">Braai Like a <span class="gold-text">King</span></h1>
+      <p class="hero-subtitle">Authentic Tshisanyama Experience</p>
+      
+      <div class="bitcoin-notice">
+        🟡 Bitcoin is now accepted for all our items — from braai platters to pizza to drinks!<br>
+        📍 Pull up, pay in crypto, and enjoy the flavour of Kasi like never before!
+      </div>
+      
+      <div class="specials-board">
+        <h3>🔥 SPECIAL OF THE DAY 🔥</h3>
+        <ul>
+          <li><strong>🔥 Beef Burger🔥</strong> - R55</li>
+          <li><strong>🔥 Chicken Burger🔥</strong> - R50</li>
+          <li><strong>🔥 Burger & Fries🔥</strong> - R75</li>
+          <li><strong>🔥Hot Dog🔥</strong> - R35</li>
+          <li><strong>🔥 Bunny Chow🔥 </strong> - R38</li>
+          <li><strong>🔥 #Wednesday Pizza Special🔥 </strong> - Only R100</li>
+        </ul>
+      </div>
+      <a href="#menu" class="cta-button nav-btn">Explore Menu</a>
+    </header>
+  </section>
+
+<section id="menu">
+  <h2 class="kasi-title">🔥 Our Delicious Menu 🔥</h2>
+
+  <!-- Braai Meat Category -->
+  <div class="menu-category">
+    <h3>🍖 Braai Meat</h3>
+    <div class="menu-grid">
+
+      <!-- Beef -->
+      <div class="menu-item">
+        <img src="images/beef.jpg" alt="Beef Braai" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🥩 BEEF</h4>
+          <p>4 Big Pieces 650g</p>
+          <span class="price">R175</span>
+          <button class="order-btn" 
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BEEF%20(4%20Big%20Pieces%20650g)%20-%20R175')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+        <!-- Pork -->
+      <div class="menu-item">
+        <img src="images/pork.jpg" alt="Pork Braai" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🥩 PORK</h4>
+          <p>4 Big Pieces 650g</p>
+          <span class="price">R150</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20PORK%20(4%20Big%20Pieces%20650g)%20-%20R150')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Beef Sausage -->
+      <div class="menu-item">
+        <img src="images/beef-sausage.png" alt="Beef Sausage" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🥩 BEEF SAUSAGE</h4>
+          <p>Juicy Thick Sausage 600g</p>
+          <span class="price">R105</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BEEF%20SAUSAGE%20(600g)%20-%20R105')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Chicken Quarter Leg -->
+      <div class="menu-item">
+        <img src="images/chicken-leg.png" alt="Chicken Leg" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🍗 PLAIN QUARTER LEG</h4>
+          <p>Thunder Leg</p>
+          <span class="price">R45</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20PLAIN%20QUARTER%20LEG%20-%20R45')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <!-- BBQ Chicken Wings -->
+      <div class="menu-item">
+        <img src="images/chicken-wings.jpg" alt="BBQ Chicken Wings" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🍗 BBQ CHICKEN WING</h4>
+          <p>Saucy Wings</p>
+          <span class="price">R18.50</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BBQ%20CHICKEN%20WINGS%20-%20R18.50')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+ <!-- 2Chicken Wings -->
+      <div class="menu-item">
+        <img src="images/cchips.jpg" alt="BBQ Chicken Wings" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🍗 2 CHICKEN WINGS & Chips</h4>
+          <p>Saucy Wings</p>
+          <span class="price">R55</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BBQ%20CHICKEN%20WINGS%20-%20R18.50')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/bchips.jpg" alt="BBQ Chicken Wings" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🥩1 Beef </h4>
+          <p>Thick Beef</p>
+          <span class="price">R60</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BBQ%20CHICKEN%20WINGS%20-%20R18.50')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+
+      <div class="menu-item">
+        <img src="images/pork1.jpg" alt="BBQ Chicken Wings" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🥩1 Pork </h4>
+          <p>Tangy Pork</p>
+          <span class="price">R50</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BBQ%20CHICKEN%20WINGS%20-%20R18.50')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+
+      <div class="menu-item">
+        <img src="images/2pork.jpeg" alt="BBQ Chicken Wings" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🥩2 Pork & Pap </h4>
+          <p>Filling Portion</p>
+          <span class="price">R120</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BBQ%20CHICKEN%20WINGS%20-%20R18.50')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/papbeef.jpg" alt="BBQ Chicken Wings" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🥩2 Beef & Pap </h4>
+          <p>Filling Portion</p>
+          <span class="price">R135</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BBQ%20CHICKEN%20WINGS%20-%20R18.50')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="images/bb.jpg" alt="BBQ Chicken Wings" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🍟Small Chips</h4>
+          <p>Basic Portion</p>
+          <span class="price">R25</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BBQ%20CHICKEN%20WINGS%20-%20R18.50')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+ <div class="menu-item">
+        <img src="images/schips.jpeg" alt="BBQ Chicken Wings" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🍟Medium Chips</h4>
+          <p>Loaded Fries</p>
+          <span class="price">R40</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BBQ%20CHICKEN%20WINGS%20-%20R18.50')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+<div class="menu-item">
+        <img src="images/lchips.jpg" alt="BBQ Chicken Wings" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🍟Large Chips</h4>
+          <p>Extra Loaded Fries</p>
+          <span class="price">R48</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BBQ%20CHICKEN%20WINGS%20-%20R18.50')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+
+<div class="menu-item">
+        <img src="images/samp.jpg" alt="BBQ Chicken Wings" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>🫘Mngqusho</h4>
+          <p>Rainy dat Meal</p>
+          <span class="price">R55</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20BBQ%20CHICKEN%20WINGS%20-%20R18.50')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- Pizza Category -->
+  <div class="menu-category">
+    <h3>🍕 Pizza</h3>
+    <div class="menu-grid">
+
+      <!-- Margherita Pizza -->
+      <div class="menu-item">
+        <img src="images/magherita.jpg" alt="Margherita Pizza" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>MARGHERITA</h4>
+          <p>Tomato & Mozzarella</p>
+          <span class="price">R95</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20MARGHERITA%20PIZZA%20-%20R95')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+        <!-- CARRIBBEAN Pizza -->
+      <div class="menu-item">
+        <img src="images/lol0.jpg" alt="Margherita Pizza" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>CARRIBBEAN</h4>
+          <p>🍍 & 🥩</p>
+          <span class="price">R115</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20MARGHERITA%20PIZZA%20-%20R95')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Add other pizza items in same structure -->
+
+ <!-- REGINA (THE QUEEN) -->
+      <div class="menu-item">
+        <img src="images/pizza 4.jpg" alt="Margherita Pizza" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>REGINA(The Queen)</h4>
+          <p>🍄‍🟫 & 🥩</p>
+          <span class="price">R120</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20MARGHERITA%20PIZZA%20-%20R95')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+       <!-- KASI SPECIAL -->
+      <div class="menu-item">
+        <img src="images/pizza 5.jpg" alt="Margherita Pizza" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>KASI SPECIAL</h4>
+          <p>🧅, 🫑, 🌶 & 🧄</p>
+          <span class="price">R115</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20MARGHERITA%20PIZZA%20-%20R95')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+       <!-- FARMER'S PIZZA -->
+      <div class="menu-item">
+        <img src="images/pizza 6.jpg" alt="Margherita Pizza" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>FARMER'S PIZZA</h4>
+          <p>🍄‍🟫, 🌱, 🫑, 🌶, 🧅, & 🥬</p>
+          <span class="price">R135</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20MARGHERITA%20PIZZA%20-%20R95')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+
+             <!-- MEXICAN (KASI STYLE) -->
+      <div class="menu-item">
+        <img src="images/mexican.jpg" alt="Margherita Pizza" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>MEXICAN (KASI STYLE)</h4>
+          <p>🥩, 🧅, 🫑, 🌶 & 🧄</p>
+          <span class="price">R135</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20MARGHERITA%20PIZZA%20-%20R95')">
+            Order Now
+          </button>
+        </div>
+      </div>
+      
+        <!-- KIPPY -->
+      <div class="menu-item">
+        <img src="images/pizza 7.jpg" alt="Margherita Pizza" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>KIPPY</h4>
+          <p>🍗,  🧀(feta) & 🍄‍🟫</p>
+          <span class="price">R140</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20MARGHERITA%20PIZZA%20-%20R95')">
+            Order Now
+          </button>
+        </div>
+      </div>
+    
+        <!-- 4WAYS -->
+      <div class="menu-item">
+        <img src="images/pizza 8.jpg" alt="Margherita Pizza" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>4WAYS</h4>
+          <p>🍄‍🟫, 🥩(ham), 🥬 & 🌱(olives)</p>
+          <span class="price">R135</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20MARGHERITA%20PIZZA%20-%20R95')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+        <!-- INGULUBE -->
+      <div class="menu-item">
+        <img src="images/pizza 9.jpg" alt="Margherita Pizza" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>INGULUBE</h4>
+          <p>🥓, 🍖(salami) & 🥩(ham)</p>
+          <span class="price">R135</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20MARGHERITA%20PIZZA%20-%20R95')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+        <!-- JEFF & RONEL -->
+      <div class="menu-item">
+        <img src="images/pizza10.jpg" alt="Margherita Pizza" class="menu-item-image">
+        <div class="menu-item-details">
+          <h4>JEFF & RONEL</h4>
+          <p>🥓, 🥬, 🧀(feta), & 🥑(Avo - Seasonal)</p>
+          <span class="price">R150</span>
+          <button class="order-btn"
+                  onclick="window.open('https://wa.me/27787876984?text=I%20want%20to%20order%20MARGHERITA%20PIZZA%20-%20R95')">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+<!-- Platters Category -->
+<div class="menu-category">
+  <h3>🍽️ Platters</h3>
+  <div class="menu-grid">
+    
+    <!-- Kasi 1 Platter -->
+    <div class="menu-item">
+      <img src="images/platter1.jpg" alt="Kasi 1 Platter" class="menu-item-image">
+      <div class="menu-item-details">
+        <h4>KASI 1</h4>
+        <p>1pce Pork🥩 , 1pce Beef🥩, 2 Wings🍗 & Pap🍚</p>
+        <span class="price">R150</span>
+        <button class="order-btn"
+                onclick="window.open('https://wa.me/27787876984?text=I want to order KASI 1 PLATTER - R150')">
+          Order Now
+        </button>
+      </div>
+    </div>
+
+    <!-- Kasi 2 Platter -->
+    <div class="menu-item">
+      <img src="images/platter2.jpeg" alt="Kasi 2 Platter" class="menu-item-image">
+      <div class="menu-item-details">
+        <h4>KASI 2</h4>
+        <p>1pce Beef🥩, 1pce Pork🥩, Portion of Voroso, 2 Wings🍗 & Pap🍚</p>
+        <span class="price">R315</span>
+        <button class="order-btn"
+                onclick="window.open('https://wa.me/27787876984?text=I want to order KASI 2 PLATTER - R315')">
+          Order Now
+        </button>
+      </div>
+    </div>
+
+    <!-- Kasi 3 Platter -->
+    <div class="menu-item">
+      <img src="images/platter3.jpg" alt="Kasi 3 Platter" class="menu-item-image">
+      <div class="menu-item-details">
+        <h4>KASI 3</h4>
+        <p>2pce Beef🥩, 2pce Pork🥩, Portion of Voroso, 4 Wings🍗 & Pap🍚</p>
+        <span class="price">R360</span>
+        <button class="order-btn"
+                onclick="window.open('https://wa.me/27787876984?text=I want to order KASI 3 PLATTER - R360')">
+          Order Now
+        </button>
+      </div>
+    </div>
+
+    <!-- Kasi 4 Platter -->
+    <div class="menu-item">
+      <img src="images/platter4.jpg" alt="Kasi 4 Platter" class="menu-item-image">
+      <div class="menu-item-details">
+        <h4>KASI 4</h4>
+        <p>4pce Beef🥩, 4pce Pork🥩, Portion of Voroso, 6 Wings🍗 & Pap🍚</p>
+        <span class="price">R555</span>
+        <button class="order-btn"
+                onclick="window.open('https://wa.me/27787876984?text=I want to order KASI 4 PLATTER - R555')">
+          Order Now
+        </button>
+      </div>
+    </div>
+
+    <!-- Kasi 5 Platter -->
+    <div class="menu-item">
+      <img src="images/platter5.jpg" alt="Kasi 5 Platter" class="menu-item-image">
+      <div class="menu-item-details">
+        <h4>KASI 5</h4>
+        <p>4pce Beef🥩, 4pce Pork🥩, 2 Portions of Voroso, 10 Wings🍗 & Pap🍚</p>
+        <span class="price">R850</span>
+        <button class="order-btn"
+                
+        </button>
+      </div>
+    </div>
+
+  </div> <!-- End of menu-grid -->
+</div> <!-- End of menu-category -->
+
+
+<!-- CSS for menu -->
+<style>
+.kasi-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #ff6700;
+}
+
+.menu-category {
+  margin-bottom: 3rem;
+}
+
+.menu-category h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #ff6700;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.menu-item {
+  background: rgba(0,0,0,0.8);
+  border-radius: 10px;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+}
+
+.menu-item-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.menu-item-details h4 {
+  margin: 0.5rem 0;
+}
+
+.order-btn {
+  background: #ff6700;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.order-btn:hover {
+  background: #e65c00;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.menu-item {
+  background: rgba(0,0,0,0.8);
+  border-radius: 10px;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+}
+
+.menu-item-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.order-btn {
+  background: #ff6700;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.order-btn:hover {
+  background: #e65c00;
+}
+
+</style>
+
+
+  <section id="performances">
+    <h2 class="kasi-title">🎤 Our Vibe: Events & Performances</h2>
+    <div class="events-catalogue">
+        <h3 class="catalogue-title gold-text">🔥 Upcoming Events 🔥</h3>
+        <div class="catalogue-grid">
+            <div class="event-card flame-card">
+                <div class="event-image-placeholder">
+                    <img src="images/placeholder_upcoming_event_1.jpg" alt="Upcoming Event">
+                </div>
+                <h4 class="event-title">🔥FIRST SATURDAY BRAAI DAY🍖</h4>
+                <p class="event-date">2nd Aug 2024 6PM-2AM</p>
+                <p class="event-description">First Saturday Braai Day is back this Saturday! Good vibes, great meat, better company!</p>
+                <a href="#" class="cta-button event-cta">Learn More / RSVP</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+      
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="#" class="cta-button" id="viewCartBtn">View Cart</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="story">
+    <div class="container">
+      <h2 class="hero-title" style="text-align: center; margin-bottom: 2rem;">🔥 Our Story 🔥</h2>
+      <div class="specials-board">
+        <h3>The KasiLyfstyle Experience</h3>
+        <p style="margin-bottom: 1rem;">KasiLyfstyle Tshisanyama is a vibrant and integral part of South African culture, offering a unique blend of traditional and modern experiences.</p>
+        <p>These bustling outdoor spaces, often found in urban and rural townships, provide a communal gathering place for locals to socialize, enjoy delicious food, and imbibe in their favorite beverages. 🍖🍻🎶</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="performances">
+    <div class="container">
+      <h2 class="hero-title" style="text-align: center; margin-bottom: 2rem;">🎤 Our Vibe: Events & Performances</h2>
+      
+      <div class="events-catalogue">
+        <h3 class="gold-text" style="text-align: center; font-size: 1.8rem; margin-bottom: 2rem;">🔥 Upcoming Events 🔥</h3>
+        
+        <div class="event-card">
+  <div class="event-poster">
+    <img src="images/8sep.jpg" alt="Event Poster">
+  </div>
+</div>
+
+          <div class="event-details">
+            <h4>🔥FIRST SATURDAY BRAAI DAY🍖</h4>
+            <p class="event-date">📆 8TH SEP 2025 6PM-2AM</p>
+            <p class="event-description">💃🏾🔥 This Sunday, We Celebrate Kasi Love!</p>
+            <div style="text-align: center; margin-top: 1rem;">
+              <a href="#" class="cta-button">Learn More / RSVP</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="events-catalogue" style="margin-top: 3rem;">
+
+
+        
+        <h3 class="gold-text" style="text-align: center; font-size: 1.8rem; margin-bottom: 2rem;">📸 Past Events & Memories 📸</h3>
+        
+<div class="event-card">
+  <div class="event-poster">
+    <img src="images/tem.jpg" alt="Event Poster">
+  </div>
+</div>
+          <div class="event-details">
+            <h4>🍕#Wednesday Pizza Special</h4>
+            <p class="event-date">📆 #Wednesdays</p>
+            <p class="event-description">Turn your midweek into a vibe with our Pizza Special!🫣.</p>
+          </div>
+        </div>
+        
+        <!-- More past events would go here -->
+
+<div class="event-card">
+  <div class="event-poster">
+    <img src="images/WOMEN.jpg" alt="Event Poster">
+  </div>
+</div>
+          <div class="event-details">
+            <h4>🩷Women's Day</h4>
+            <p class="event-date">📆 9TH AUG 2025 6PM</p>
+            <p class="event-description">🎉 Ladies, it’s your time to shine!.</p>
+          </div>
+        </div>
+        
+        <!-- More past events would go here -->
+
+<div class="event-card">
+  <div class="event-poster">
+    <img src="images/bra.jpg" alt="Event Poster">
+  </div>
+</div>
+          <div class="event-details">
+            <h4>🔥Braai Day🔥</h4>
+            <p class="event-date">📆 2 AUG 2025 6PM-2AM</p>
+            <p class="event-description">🔥 First Saturday Braai Day is back this Saturday! Good vibes, great meat, better company! 🍖🎶</p>
+          </div>
+        </div>
+        
+        <!-- More past events would go here -->
+
+<div class="event-card">
+  <div class="event-poster">
+    <img src="images/SIPP PURPLE.jpg" alt="Event Poster">
+  </div>
+</div>
+          <div class="event-details">
+            <h4>🔥RUGBY LIVE at Kasi Lyfstyle!🔥</h4>
+            <p class="event-date">📆 19 JUL 2025 5PM</p>
+            <p class="event-description">📍 Catch the Springboks vs Georgia.</p>
+          </div>
+        </div>
+        
+        <!-- More past events would go here -->
+
+        <div class="event-card">
+  <div class="event-poster">
+    <img src="images/pool.jpg" alt="Event Poster">
+  </div>
+</div>
+          <div class="event-details">
+            <h4>🔥Pool Tournament!🔥</h4>
+            <p class="event-date">📆6 JUL 1PM</p>
+            <p class="event-description">Who’s got the aim? Compete or come vibe — DJ’s on deck, food on fire, and the competition is heating up!🎱</p>
+          </div>
+        </div>
+        
+        <!-- More past events would go here -->
+
+
+
+      </div>
+      
+<div class="events-catalogue" style="margin-top: 3rem;">
+  <h3 class="gold-text" style="text-align: center; font-size: 1.8rem; margin-bottom: 2rem;">
+    🎥 Live Performances & Highlights 🎥
+  </h3>
+
+  <div class="video-grid">
+    <div class="video-player">
+      <video width="320" height="240" controls>
+        <source src="videos/p2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="video-player">
+      <video width="320" height="240" controls>
+        <source src="videos/p1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="video-player">
+      <video width="320" height="240" controls>
+        <source src="videos/p3.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="video-player">
+      <video width="320" height="240" controls>
+        <source src="videos/p4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="video-player">
+      <video width="320" height="240" controls>
+        <source src="videos/performance5.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="video-player">
+      <video width="320" height="240" controls>
+        <source src="videos/performance7.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</div>
+
+  </section>
+
+  <section id="testimonials">
+    <div class="container">
+      <h2 class="hero-title" style="text-align: center; margin-bottom: 2rem;">💬 What Our Customers Say 💬</h2>
+      
+<div class="testimonial-carousel">
+  <div class="testimonial-images">
+    <img src="images/client11.jpg" alt="Client 1">
+    <img src="images/client21.jpg" alt="Client 2">
+    <img src="images/client31.jpg" alt="Client 3">
+    <img src="images/client4.jpg" alt="Client 4">
+    <img src="images/client5.jpg" alt="Client 5">
+    <img src="images/client6.jpg" alt="Client 6">
+    <img src="images/client7.jpg" alt="Client 7">
+    <img src="images/client8.jpg" alt="Client 8">
+    <img src="images/client9.jpg" alt="Client 9">
+  </div>
+</div>
+
+      
+      <div class="specials-board">
+        <h3>Customer Reviews</h3>
+        <ul>
+          <li>"The best braai in the township! Always fresh and delicious." - Thando M.</li>
+          <li>"The atmosphere here is electric, and the food is out of this world. Highly recommend!" - Zola N.</li>
+          <li>"My family and I love coming here for our weekend meals. Great portions and friendly staff." - Lerato P.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="hero-title" style="text-align: center; margin-bottom: 2rem;">📍 Contact & Location</h2>
+      <div class="specials-board">
+        <h3>Get In Touch</h3>
+        <p style="margin-bottom: 1rem;"><strong>Address:</strong> 7918 Mbeki Street, Phase 3, Kwanokuthula</p>
+        <p style="margin-bottom: 1rem;"><strong>Phone:</strong> +27 78 787 6984</p>
+        <p style="margin-bottom: 1rem;"><strong>Hours:</strong> Mon-Sun: 10:00 AM - 10:00 PM</p>
+        <div style="text-align: center; margin-top: 1.5rem;">
+          <a href="https://wa.me/27787876984" class="cta-button">Message Us on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-logo">Kasi Lyfstyle</div>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      <div class="sponsor">
+        <p>Proudly Sponsored By</p>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iNTAiPjx0ZXh0IHg9IjUwIiB5PSIyNSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIiBmaWxsPSIjRkZENzAwIj5DQVNUTEUgRE9VQkxFIE1BTFQ8L3RleHQ+PC9zdmc+" alt="Castle Double Malt" class="sponsor-logo">
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div class="cart-modal" id="cartModal">
+    <h2>Your Cart</h2>
+    <div class="cart-items" id="cartItems">
+      <!-- Cart items will be added here dynamically -->
+    </div>
+    <div class="cart-total">
+      <strong>Total: R<span id="cartTotal">0</span></strong>
+    </div>
+    
+    <div class="payment-options">
+      <h3>Payment Method</h3>
+      <button class="payment-option" onclick="selectPayment('cash')">💵 Cash</button>
+      <button class="payment-option" onclick="selectPayment('card')">💳 Card</button>
+      <button class="payment-option" onclick="selectPayment('bitcoin')">₿ Bitcoin</button>
+    </div>
+    
+    <div style="margin-top: 2rem;">
+      <button class="cta-button" style="width: 100%;" onclick="checkout()">Checkout</button>
+    </div>
+    
+    <button style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer;" onclick="closeCart()">×</button>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal">
+      <h2>Login to Your Account</h2>
+      <input type="email" placeholder="Email" id="loginEmail">
+      <input type="password" placeholder="Password" id="loginPassword">
+      <button class="cta-button" style="width: 100%;" onclick="login()">Login</button>
+      
+      <p style="text-align: center; margin-top: 1rem;">
+        Don't have an account? <a href="#" onclick="showRegister()">Register</a>
+      </p>
+      
+      <button style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer;" onclick="closeModal()">×</button>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal">
+      <h2>Create an Account</h2>
+      <input type="text" placeholder="Full Name" id="registerName">
+      <input type="email" placeholder="Email" id="registerEmail">
+      <input type="password" placeholder="Password" id="registerPassword">
+      <input type="password" placeholder="Confirm Password" id="registerConfirmPassword">
+      <button class="cta-button" style="width: 100%;" onclick="register()">Register</button>
+      
+      <p style="text-align: center; margin-top: 1rem;">
+        Already have an account? <a href="#" onclick="showLogin()">Login</a>
+      </p>
+      
+      <button style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer;" onclick="closeModal()">×</button>
+    </div>
+  </div>
+
+  <a href="https://wa.me/27787876984" class="whatsapp-float" target="_blank" style="position: fixed; bottom: 20px; right: 20px; z-index: 999; width: 60px; height: 60px;">
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPjxwYXRoIGZpbGw9IiMyNUM2MzYiIGQ9Ik0yNTYgNEEyNTIgMjUyIDAgMCAwIDY4LjY1IDQ0N0wxNCA0OTRsNTAtMTQ1YTI1MiAyNTIgMCAxIDAgMTkyLTI0NXoiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMzY4IDM2NmMwIDYxLTU0IDExMC0xMjAgMTEwYTExOCAxMTggMCAwIDEtNTItMTBsLTU4IDE2IDE2LTU2YTEyMCAxMjAgMCAwIDEtMTgtNjBjMC02MSA1NC0xMTAgMTIwLTExMHMxMjAgNDkgMTIwIDExMHptLTY0LTI4YTM4IDM4IDAgMSAwIDM4LTM4IDM4IDM4IDAgMCAwLTM4IDM4em05NCAwYTM4IDM4IDAgMSAwIDM4LTM4IDM4IDM4IDAgMCAwLTM4IDM4eiIvPjxwYXRoIGZpbGw9IiMyNUM2MzYiIGQ9Ik0zNTIgMzM4YTM4IDM4IDAgMSAxIDM4LTM4IDM4IDM4IDAgMCAxLTM4IDM4em05NC0zOGEzOCAzOCAwIDEgMSAzOC0zOCAzOCAzOCAwIDAgMS0zOCAzOHptLTk0IDM4YTM4IDM4IDAgMSAxIDM4LTM4IDM4IDM4IDAgMCAxLTM4IDM4em05NC0zOGEzOCAzOCAwIDEgMSAzOC0zOCAzOCAzOCAwIDAgMS0zOCAzOHoiLz48L3N2Zz4=" alt="WhatsApp" />
+  </a>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+
+    // Navigation functionality
+    const navLinks = document.querySelectorAll('.nav-btn');
+    const sections = document.querySelectorAll('section');
+    
+    function showSection(id) {
+      sections.forEach(section => {
+        section.classList.toggle('active', section.id === id);
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href').substring(1) === id);
+      });
+    }
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        if (link.getAttribute('href').startsWith('#')) {
+          e.preventDefault();
+          const target = link.getAttribute('href').substring(1);
+          showSection(target);
+          history.pushState(null, null, `#${target}`);
+          
+          // Close mobile menu if open
+          document.querySelector('.nav-links').classList.remove('active');
+        }
+      });
+    });
+
+    // Handle back/forward navigation
+    window.addEventListener('popstate', () => {
+      const hash = location.hash ? location.hash.substring(1) : 'home';
+      showSection(hash);
+    });
+
+    // Load correct section from hash on initial load
+    const initial = location.hash ? location.hash.substring(1) : 'home';
+    showSection(initial);
+
+    // Simple flame effect for demonstration
+    const canvas = document.getElementById('flame-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    
+    const particles = [];
+    const particleCount = window.innerWidth < 768 ? 30 : 100;
+    
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + Math.random() * 20;
+        this.size = Math.random() * 15 + 5;
+        this.speedY = -Math.random() * 3 - 1;
+        this.speedX = Math.random() * 2 - 1;
+        this.color = `hsl(${20 + Math.random() * 20}, 100%, 50%)`;
+        this.alpha = 0.7 + Math.random() * 0.3;
+      }
+      
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.alpha -= 0.005;
+        this.size *= 0.98;
+        
+        if (this.alpha <= 0 || this.size <= 0.5) {
+          this.reset();
+        }
+      }
+      
+      draw() {
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    
+    // Create particles
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+    
+    // Animation loop
+    function animate() {
+      ctx.globalAlpha = 0.1;
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      
+      requestAnimationFrame(animate);
+    }
+    
+    // Start animation
+    animate();
+
+    // Cart functionality
+    let cart = [];
+    let selectedPayment = '';
+    
+    function addToCart(item, price) {
+      cart.push({ item, price });
+      updateCartDisplay();
+    }
+    
+    function updateCartDisplay() {
+      const cartCount = document.querySelector('.cart-count');
+      const cartItems = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+      
+      cartCount.textContent = cart.length;
+      
+      // Clear cart items
+      cartItems.innerHTML = '';
+      
+      // Add items to cart
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+        
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+          <div>${item.item}</div>
+          <div>R${item.price} <button onclick="removeFromCart(${index})">×</button></div>
+        `;
+        
+        cartItems.appendChild(cartItem);
+      });
+      
+      cartTotal.textContent = total;
+    }
+    
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartDisplay();
+    }
+    
+    function openCart() {
+      document.getElementById('cartModal').classList.add('active');
+    }
+    
+    function closeCart() {
+      document.getElementById('cartModal').classList.remove('active');
+    }
+    
+    function selectPayment(method) {
+      selectedPayment = method;
+      
+      // Remove selected class from all buttons
+      document.querySelectorAll('.payment-option').forEach(btn => {
+        btn.classList.remove('selected');
+      });
+      
+      // Add selected class to clicked button
+      event.target.classList.add('selected');
+    }
+    
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+      
+      if (!selectedPayment) {
+        alert('Please select a payment method');
+        return;
+      }
+      
+      alert(`Order placed successfully! Payment method: ${selectedPayment}. Total: R${document.getElementById('cartTotal').textContent}`);
+      cart = [];
+      updateCartDisplay();
+      closeCart();
+    }
+    
+    // Login functionality
+    function showLogin() {
+      document.getElementById('registerModal').classList.remove('active');
+      document.getElementById('loginModal').classList.add('active');
+    }
+    
+    function showRegister() {
+      document.getElementById('loginModal').classList.remove('active');
+      document.getElementById('registerModal').classList.add('active');
+    }
+    
+    function closeModal() {
+      document.getElementById('loginModal').classList.remove('active');
+      document.getElementById('registerModal').classList.remove('active');
+    }
+    
+    function login() {
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Simple validation
+      if (!email || !password) {
+        alert('Please enter both email and password');
+        return;
+      }
+      
+      alert('Login successful!');
+      closeModal();
+    }
+    
+    function register() {
+      const name = document.getElementById('registerName').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('registerConfirmPassword').value;
+      
+      // Simple validation
+      if (!name || !email || !password || !confirmPassword) {
+        alert('Please fill all fields');
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+      
+      alert('Registration successful!');
+      showLogin();
+    }
+    
+    // Event listeners
+    document.getElementById('cartIcon').addEventListener('click', openCart);
+    document.getElementById('viewCartBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      openCart();
+    });
+    document.getElementById('loginBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      showLogin();
+    });
+  </script>
+</body>
+</html>
